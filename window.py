@@ -1,18 +1,19 @@
 from tkinter import Tk, BOTH, Canvas
+from point_line import Point, Line
 
 class Window:
 
     def __init__(self, width, height):
-        self.width = width
-        self.height = height
+        self.__width = width
+        self.__height = height
 
         self.__root = Tk()
-        self.__root.title = "This is the Title for now"
-        
-        self.canvas = Canvas(self.__root, width = self.width, height = self.height, bg="white")
-        self.canvas.pack()
+        self.__root.title("This is the Title for now")
+    
+        self._canvas = Canvas(self.__root, width = self.__width, height = self.__height, bg="white")
+        self._canvas.pack()
 
-        self.running = False
+        self.__running = False
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
 
     def redraw(self):
@@ -20,10 +21,13 @@ class Window:
         self.__root.update()
     
     def wait_for_close(self):
-        self.running = True
-        while self.running:
+        self.__running = True
+        while self.__running:
             self.redraw()
 
     def close(self):
-        self.running = False
+        self.__running = False
+
+    def draw_line(self, line, fill_color):
+        line.draw(self._canvas, fill_color)
 
