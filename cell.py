@@ -38,8 +38,13 @@ class Cell:
     def draw_move(self, to_cell, undo=False):
         # Should draw line from center of one cell to the other
         
-        self_center = Point((self.x1 + self.x2)/2,(self.y1 + self.y2)/2)
-        to_cell_center = Point((to_cell.x1 + to_cell.x2)/2,(to_cell.y1 + to_cell.y2)/2)
+        self_center = Point((self._x1 + self._x2)/2,(self._y1 + self._y2)/2)
+        to_cell_center = Point((to_cell._x1 + to_cell._x2)/2,(to_cell._y1 + to_cell._y2)/2)
+        middle_line = Line(self_center, to_cell_center)
         
         # Now Draw, Red if undo flag not set, gray otherwise
+        if undo:
+            self._win.draw_line(middle_line, "gray")
+        else:
+            self._win.draw_line(middle_line, "red")
         
