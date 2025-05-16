@@ -15,26 +15,37 @@ class Cell:
         self.has_bottom_wall = True
 
         self._win = win
+        
+        self.visited = False
     
     def draw(self):
         if self._win is None:
             return
+        
         if self.has_left_wall:
-            self.create_wall(self._x1, self._y1, self._x1, self._y2)
+            self.create_wall(self._x1, self._y1, self._x1, self._y2, "black")
+        else:
+            self.create_wall(self._x1, self._y1, self._x1, self._y2, "white")
         
         if self.has_right_wall:
-            self.create_wall(self._x2, self._y1, self._x2, self._y2)
+            self.create_wall(self._x2, self._y1, self._x2, self._y2, "black")
+        else:
+            self.create_wall(self._x2, self._y1, self._x2, self._y2, "white")
             
         if self.has_top_wall:
-            self.create_wall(self._x1, self._y1, self._x2, self._y1)
+            self.create_wall(self._x1, self._y1, self._x2, self._y1, "black")
+        else:
+            self.create_wall(self._x1, self._y1, self._x2, self._y1, "white")
 
         if self.has_bottom_wall:
-            self.create_wall(self._x1, self._y2, self._x2, self._y2)
+            self.create_wall(self._x1, self._y2, self._x2, self._y2, "black")
+        else:
+            self.create_wall(self._x1, self._y2, self._x2, self._y2, "white")
     
-    def create_wall(self, x1, y1, x2, y2):
+    def create_wall(self, x1, y1, x2, y2, color):
         if self._win is not None:
             line = Line(Point(x1, y1), Point(x2, y2))
-            return self._win.draw_line(line, "black")
+            return self._win.draw_line(line, f"{color}")
         return None
     
     def draw_move(self, to_cell, undo=False):

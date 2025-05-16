@@ -1,6 +1,7 @@
 from window import Window
 from point_line import Point, Line
 from cell import Cell
+from maze import Maze
 
 def main():
     # Create window
@@ -22,14 +23,11 @@ def main():
     cell1.has_bottom_wall = False
     cell1.has_right_wall = False
     cell1.has_left_wall = False
-    
-    # Call on Cell.draw()
-    cell1.draw()
-    cell2.draw()
-    cell3.draw()
 
-    # Testing draw_move()
-    cell2.draw_move(cell3, True)
+    num_cols = 10
+    num_rows = 11
+    m1 = Maze(20, 20, num_rows, num_cols, 40, 40, win)
+    
 
     # Wait for window to be closed
     win.wait_for_close()
