@@ -2,6 +2,7 @@ from cell import Cell
 from point_line import Point
 import time
 import random
+from global_variables import *
 
 class Maze:
 
@@ -59,7 +60,7 @@ class Maze:
         if self._win is None:
             return
         self._win.redraw()
-        time.sleep(0.03)
+        time.sleep(ANIMATE_SPEED)
     
     def _break_entrance_and_exit(self):
         entrance = self._cells[0][0]
@@ -139,3 +140,35 @@ class Maze:
                 next_cell.draw()
                 self._break_walls_r(next_coordinates[0], next_coordinates[1])
                 continue
+    
+    def __reset_cells_visited(self):
+        for col in self._cells:
+            for cell in col:
+                cell.visited = False
+    
+    def solve(self):
+        return self.solve_r(0, 0)
+
+    def solve_r(self, i, j):
+        self._animate()
+        current_cell = self._cells[i][j]
+        current_cell.visited = True
+
+        if i == self._num_cols - 1 and j == self._num_rows - 1:
+            return True
+        
+        # Up
+        if j > 0:
+            up_cell = self._cells[i][j - 1]
+            if not current_cell.has_top_wall and not up_cell.visited:
+                current_cell.draw_line(up_cell)
+                result = self.solve_r(i, j - 1)
+                if result:
+                    return True
+                else:
+                    current_cell.draw_line(up_cell, undo=True)
+        # Down
+
+        # Left
+
+        # Right
