@@ -147,28 +147,43 @@ class Maze:
                 cell.visited = False
     
     def solve(self):
-        return self.solve_r(0, 0)
+        self.__reset_cells_visited()
+        return self._solve_r(0, 0)
 
-    def solve_r(self, i, j):
+    def _solve_r(self, i, j):
         self._animate()
         current_cell = self._cells[i][j]
         current_cell.visited = True
 
         if i == self._num_cols - 1 and j == self._num_rows - 1:
             return True
-        
-        # Up
-        if j > 0:
-            up_cell = self._cells[i][j - 1]
-            if not current_cell.has_top_wall and not up_cell.visited:
-                current_cell.draw_line(up_cell)
-                result = self.solve_r(i, j - 1)
-                if result:
-                    return True
-                else:
-                    current_cell.draw_line(up_cell, undo=True)
-        # Down
+        else:
+            deltas = [ 
+                ((0, -1), "has_top_wall"),    # up
+                ((1, 0), "has_right_wall"),   # right
+                ((0, 1), "has_bottom_wall"),  # down
+                ((-1, 0), "has_left_wall")    # left
+            ]
+            
+            for (di, dj), wall_attr in deltas:
+                ni = i + di
+                nj = j + dj  # Now (ni, nj) is potential neighbor in direction
+                print(f"Checking neighbor at ({ni}, {nj})")
 
-        # Left
+                # Check if neighbor is in bounds
+                if 0 <= ni <= self._num_cols - 1 and 0 <= nj <= self._num_rows - 1:
+                    neighbor_cell = self._cells[ni][nj]
+                    has_wall = getattr(current_cell, wall_attr)
+                    print(f"  In bounds: Yes, Has wall: {has_wall}, Visited: {neighbor_cell.visited}")
 
-        # Right
+                    # Check if there's no wall and cell hasn't been visited
+                    if not has_wall and not neighbor_cell.visited:
+                        print(f"  Valid move from ({i},{j}) to ({ni},{nj})")
+                        current_cell.draw_move(neighbor_cell)
+                        test = self._solve_r(ni, nj)
+                        if test:
+                            return True
+                        else:
+                            print(f"  Valid move from ({i},{j}) to ({ni},{nj})")
+                            current_cell.draw_move(neighbor_cell, undo=True)
+            return False

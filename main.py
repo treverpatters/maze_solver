@@ -11,6 +11,8 @@ def main():
     # Creates and draws maze
     m1 = Maze(STARTING_X, STARTING_Y, ROWS, COLUMNS, CELL_WIDTH, CELL_HEIGHT, win)
     
+    # Call solver method
+    m1.solve()
     # Wait for window to be closed
     win.wait_for_close()
 

@@ -1,5 +1,6 @@
 from tkinter import Tk, BOTH, Canvas
 from point_line import Point, Line
+from global_variables import *
 
 class Cell:
     
@@ -23,22 +24,22 @@ class Cell:
             return
         
         if self.has_left_wall:
-            self.create_wall(self._x1, self._y1, self._x1, self._y2, "black")
+            self.create_wall(self._x1, self._y1, self._x1, self._y2, CELL_COLOR)
         else:
             self.create_wall(self._x1, self._y1, self._x1, self._y2, "white")
         
         if self.has_right_wall:
-            self.create_wall(self._x2, self._y1, self._x2, self._y2, "black")
+            self.create_wall(self._x2, self._y1, self._x2, self._y2, CELL_COLOR)
         else:
             self.create_wall(self._x2, self._y1, self._x2, self._y2, "white")
             
         if self.has_top_wall:
-            self.create_wall(self._x1, self._y1, self._x2, self._y1, "black")
+            self.create_wall(self._x1, self._y1, self._x2, self._y1, CELL_COLOR)
         else:
             self.create_wall(self._x1, self._y1, self._x2, self._y1, "white")
 
         if self.has_bottom_wall:
-            self.create_wall(self._x1, self._y2, self._x2, self._y2, "black")
+            self.create_wall(self._x1, self._y2, self._x2, self._y2, CELL_COLOR)
         else:
             self.create_wall(self._x1, self._y2, self._x2, self._y2, "white")
     
@@ -57,7 +58,7 @@ class Cell:
         
         # Now Draw, Red if undo flag not set, gray otherwise
         if undo:
-            self._win.draw_line(middle_line, "gray")
+            self._win.draw_line(middle_line, WRONG_LINE_COLOR)
         else:
-            self._win.draw_line(middle_line, "red")
+            self._win.draw_line(middle_line, CORRECT_LINE_COLOR)
         
