@@ -1,5 +1,6 @@
 from tkinter import Tk, BOTH, Canvas
 from point_line import Point, Line
+from global_variables import *
 
 class Window:
 
@@ -8,9 +9,9 @@ class Window:
         self.__height = height
 
         self.__root = Tk()
-        self.__root.title("This is the Title for now")
+        self.__root.title(WINDOW_TITLE)
     
-        self._canvas = Canvas(self.__root, width = self.__width, height = self.__height, bg="white")
+        self._canvas = Canvas(self.__root, width = self.__width, height = self.__height, bg=BACKGROUND_COLOR)
         self._canvas.pack()
 
         self.__running = False

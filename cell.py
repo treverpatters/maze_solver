@@ -26,22 +26,22 @@ class Cell:
         if self.has_left_wall:
             self.create_wall(self._x1, self._y1, self._x1, self._y2, CELL_COLOR)
         else:
-            self.create_wall(self._x1, self._y1, self._x1, self._y2, "white")
+            self.create_wall(self._x1, self._y1, self._x1, self._y2, BACKGROUND_COLOR)
         
         if self.has_right_wall:
             self.create_wall(self._x2, self._y1, self._x2, self._y2, CELL_COLOR)
         else:
-            self.create_wall(self._x2, self._y1, self._x2, self._y2, "white")
+            self.create_wall(self._x2, self._y1, self._x2, self._y2, BACKGROUND_COLOR)
             
         if self.has_top_wall:
             self.create_wall(self._x1, self._y1, self._x2, self._y1, CELL_COLOR)
         else:
-            self.create_wall(self._x1, self._y1, self._x2, self._y1, "white")
+            self.create_wall(self._x1, self._y1, self._x2, self._y1, BACKGROUND_COLOR)
 
         if self.has_bottom_wall:
             self.create_wall(self._x1, self._y2, self._x2, self._y2, CELL_COLOR)
         else:
-            self.create_wall(self._x1, self._y2, self._x2, self._y2, "white")
+            self.create_wall(self._x1, self._y2, self._x2, self._y2, BACKGROUND_COLOR)
     
     def create_wall(self, x1, y1, x2, y2, color):
         if self._win is not None:
