@@ -13,6 +13,7 @@ STARTING_X = 30
 STARTING_Y = 20
 
 ANIMATE_SPEED = 0.000001
+SOLVE_SPEED = 0.005
 
 CELL_COLOR = "black"    # Default Black
 CORRECT_LINE_COLOR = "red"   # Default red

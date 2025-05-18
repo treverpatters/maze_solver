@@ -62,6 +62,12 @@ class Maze:
         self._win.redraw()
         time.sleep(ANIMATE_SPEED)
     
+    def _solve_animate(self):
+        if self._win is None:
+            return
+        self._win.redraw()
+        time.sleep(SOLVE_SPEED)
+    
     def _break_entrance_and_exit(self):
         entrance = self._cells[0][0]
         entrance.has_top_wall = False
@@ -151,7 +157,7 @@ class Maze:
         return self._solve_r(0, 0)
 
     def _solve_r(self, i, j):
-        self._animate()
+        self._solve_animate()
         current_cell = self._cells[i][j]
         current_cell.visited = True
 
