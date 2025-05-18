@@ -168,22 +168,18 @@ class Maze:
             for (di, dj), wall_attr in deltas:
                 ni = i + di
                 nj = j + dj  # Now (ni, nj) is potential neighbor in direction
-                print(f"Checking neighbor at ({ni}, {nj})")
 
                 # Check if neighbor is in bounds
                 if 0 <= ni <= self._num_cols - 1 and 0 <= nj <= self._num_rows - 1:
                     neighbor_cell = self._cells[ni][nj]
                     has_wall = getattr(current_cell, wall_attr)
-                    print(f"  In bounds: Yes, Has wall: {has_wall}, Visited: {neighbor_cell.visited}")
 
                     # Check if there's no wall and cell hasn't been visited
                     if not has_wall and not neighbor_cell.visited:
-                        print(f"  Valid move from ({i},{j}) to ({ni},{nj})")
                         current_cell.draw_move(neighbor_cell)
                         test = self._solve_r(ni, nj)
                         if test:
                             return True
                         else:
-                            print(f"  Valid move from ({i},{j}) to ({ni},{nj})")
                             current_cell.draw_move(neighbor_cell, undo=True)
             return False
